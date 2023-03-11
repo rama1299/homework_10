@@ -68,6 +68,7 @@ class Movie {
         `
         try{
             const data = await pool.query(deleteQuery, [id])
+            return data.rows[0]
         } catch(err){
             next(err)
         }

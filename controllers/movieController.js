@@ -49,7 +49,11 @@ class MovieController {
         try{
             const {id} = req.params
             const data = await MovieServices.deleteMovie(id, next);
-            res.status(200).json(data);
+            if(data){
+                res.status(200).json(data);
+            }else{
+                next({name:"ErrorNotFound"})
+            }
         } catch(err){
             next(err);
         }
