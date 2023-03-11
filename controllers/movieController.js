@@ -28,7 +28,7 @@ class MovieController {
         try{
             const {title, genres, year} = req.body
             const data = await MovieServices.createMovie(title, genres, year, next);
-            res.status(201).json(data);
+            res.status(201).json({message: "Movie created"});
         } catch(err){
             next(err);
         }
@@ -39,7 +39,11 @@ class MovieController {
             const {id} = req.params
             const {title, genres, year} = req.body
             const data = await MovieServices.updateMovie(id, title, genres, year, next);
-            res.status(200).json(data);
+            if(data){
+                res.status(200).json({message: "Movie updated"});
+            }else{
+                next({name:"ErrorNotFound"})
+            }
         } catch(err){
             next(err);
         }
@@ -50,7 +54,7 @@ class MovieController {
             const {id} = req.params
             const data = await MovieServices.deleteMovie(id, next);
             if(data){
-                res.status(200).json(data);
+                res.status(200).json({message: "Movie deleted"});
             }else{
                 next({name:"ErrorNotFound"})
             }
