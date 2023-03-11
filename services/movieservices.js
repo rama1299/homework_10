@@ -26,6 +26,7 @@ class MovieServices {
         const data = await MovieRepository.deleteMovie(id, next);
         return data;
     }
+
 }
 
 module.exports = MovieServices;

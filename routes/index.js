@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const movieRouter = require('./movies');
-const UserController = require('../controllers/userController')
-
-router.post('/register', UserController.userRegister)
-router.post('/login', UserController.userLogin)
+const userRouter = require('./users');
 
 router.use('/movies', movieRouter);
+router.use('/', userRouter);
 
 module.exports = router;
